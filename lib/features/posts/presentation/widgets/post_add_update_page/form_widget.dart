@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/post.dart';
+import '../../bloc/create_update_delete_post/bloc/create_update_delete_post_bloc.dart';
 import 'form_submit_btn.dart';
 
 class FormWidget extends StatefulWidget {
@@ -33,6 +34,25 @@ class _FormWidgetState extends State<FormWidget> {
     super.initState();
   }
 
+  void _validateFormThenUpdateOrAddPost() {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      final post = Post(
+          id: widget.isUpdatePost ? widget.post!.id : null,
+          title: _titleController.text,
+          body: _bodyController.text);
+
+      if (widget.isUpdatePost) {
+        BlocProvider.of<AddDeleteUpdatePostBloc>(context)
+            .add(UpdatePostEvent(post: post));
+      } else {
+        BlocProvider.of<AddDeleteUpdatePostBloc>(context)
+            .add(AddPostEvent(post: post));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -41,13 +61,13 @@ class _FormWidgetState extends State<FormWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextFormFieldWidget(controller: _titleController, multiLines: false, name: "Title"),
-            TextFormFieldWidget(controller: _bodyController, multiLines: true, name: "Body"),
+            TextFormFieldWidget(
+                name: "Title", multiLines: false, controller: _titleController),
+            TextFormFieldWidget(
+                name: "Body", multiLines: true, controller: _bodyController),
             FormSubmitBtn(
                 isUpdatePost: widget.isUpdatePost,
-                onPressed: (){
-
-                })
+                onPressed: _validateFormThenUpdateOrAddPost),
           ]),
     );
   }

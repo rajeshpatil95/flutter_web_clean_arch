@@ -4,15 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/post.dart';
 
 class PostListWidget extends StatelessWidget {
-  final List<Post> posts = [
-    const Post(id: 1, title: 'Mango', body: 'King of fruit'),
-    const Post(id: 2, title: 'Lion', body: 'King of jungle'),
-    const Post(id: 3, title: 'Peacock', body: 'King of birds'),
-    const Post(id: 4, title: 'Killer whale', body: 'King of aquatic'),
-  ];
-  PostListWidget({
-    Key? key,
-  }) : super(key: key);
+  final List<Post> posts;
+  const PostListWidget({Key? key, required this.posts}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +16,13 @@ class PostListWidget extends StatelessWidget {
           leading: Text(posts[index].id.toString()),
           title: Text(
             posts[index].title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           subtitle: Text(
             posts[index].body,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
           onTap: () {
             Navigator.push(
               context,
@@ -40,7 +33,7 @@ class PostListWidget extends StatelessWidget {
           },
         );
       },
-      separatorBuilder: (context, index) => Divider(thickness: 1),
+      separatorBuilder: (context, index) => const Divider(thickness: 1),
     );
   }
 }

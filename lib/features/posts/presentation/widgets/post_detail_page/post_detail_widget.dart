@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_clean_arch/features/posts/presentation/widgets/post_detail_page/update_post_btn_widget.dart';
 
 import '../../../domain/entities/post.dart';
+import 'delete_post_btn_widget.dart';
 
 class PostDetailWidget extends StatelessWidget {
   final Post post;
@@ -17,23 +19,30 @@ class PostDetailWidget extends StatelessWidget {
         children: [
           Text(
             post.title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Divider(
+          const Divider(
             height: 50,
           ),
           Text(
             post.body,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
             ),
           ),
-          Divider(
+          const Divider(
             height: 50,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              UpdatePostBtnWidget(post: post),
+              DeletePostBtnWidget(postId: post.id!)
+            ],
+          )
         ],
       ),
     );
