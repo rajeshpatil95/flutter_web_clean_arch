@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import '../../domain/entities/post.dart';
+import '../widgets/post_add_update_page/form_widget.dart';
+
 class PostAddUpdatePage extends StatelessWidget {
-  const PostAddUpdatePage({super.key});
+  final Post? post;
+  final bool isUpdatePost;
+  const PostAddUpdatePage({super.key, this.post, required this.isUpdatePost});
 
   AppBar _buildAppBar() => AppBar(title: const Text('Add/Update Post'));
 
   Widget _buildBody() {
-    return const Center(child: Text('Add/Update Post'));
+    return FormWidget(
+        isUpdatePost: isUpdatePost, post: isUpdatePost ? post : null);
   }
 
   @override
