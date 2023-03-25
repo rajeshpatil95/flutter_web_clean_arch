@@ -32,11 +32,12 @@ class ReadPostsBloc extends Bloc<ReadPostsEvent, ReadPostsState> {
 
 ReadPostsState _mapFailureOrPostsToState(Either<Failure, List<Post>> either) {
   return either.fold(
-    (failure) => ErrorPostsState(message: _mapFailureToMessage(failure)),
-    (posts) => LoadedPostsState(
+      (failure) => ErrorPostsState(message: _mapFailureToMessage(failure)),
+      (posts) {
+    return LoadedPostsState(
       posts: posts,
-    ),
-  );
+    );
+  });
 }
 
 String _mapFailureToMessage(Failure failure) {

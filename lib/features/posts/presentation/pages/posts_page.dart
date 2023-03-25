@@ -2,15 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_clean_arch/features/posts/presentation/pages/post_add_update_page.dart';
 
+import '../../../../core/util/route_aware.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../bloc/read_posts/bloc/read_posts_bloc.dart';
 import '../widgets/posts_page/message_display_widget.dart';
 import '../widgets/posts_page/post_list_widget.dart';
 
-class PostsPage extends StatelessWidget {
+class PostsPage extends StatefulWidget {
   const PostsPage({super.key});
 
+  @override
+  State<PostsPage> createState() => _PostsPageState();
+}
+
+class _PostsPageState extends State<PostsPage> with RouteAware {
   AppBar _buildAppBar() => AppBar(title: const Text('Posts'));
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
+    super.initState();
+  }
+
+  @override
+  void didPush() {
+    BlocProvider.of<ReadPostsBloc>(context).add(RefreshPostsEvent());
+    super.didPush();
+  }
+
+  @override
+  void didPop() {
+    super.didPop();
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+  }
+
+  @override
+  void didPushNext() {
+    super.didPushNext();
+  }
 
   Widget _buildBody() {
     return Padding(
@@ -20,9 +55,7 @@ class PostsPage extends StatelessWidget {
           if (state is LoadingPostsState) {
             return const LoadingWidget();
           } else if (state is LoadedPostsState) {
-            return RefreshIndicator(
-                onRefresh: () => _onRefresh(context),
-                child: PostListWidget(posts: state.posts));
+            return PostListWidget(posts: state.posts);
           } else if (state is ErrorPostsState) {
             return MessageDisplayWidget(message: state.message);
           }
@@ -30,10 +63,6 @@ class PostsPage extends StatelessWidget {
         },
       ),
     );
-  }
-
-  Future<void> _onRefresh(BuildContext context) async {
-    BlocProvider.of<ReadPostsBloc>(context).add(RefreshPostsEvent());
   }
 
   Widget _buildFloatingButton(BuildContext context) {

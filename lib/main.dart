@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_clean_arch/features/posts/presentation/bloc/create_update_delete_post/bloc/create_update_delete_post_bloc.dart';
 
 import 'core/theme/app_theme.dart';
+import 'core/util/route_aware.dart';
 import 'features/posts/presentation/bloc/read_posts/bloc/read_posts_bloc.dart';
 import 'features/posts/presentation/pages/posts_page.dart';
 import 'injection_container.dart' as di;
@@ -28,6 +29,7 @@ class MyPostsApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appTheme,
             title: 'Posts App',
+            navigatorObservers: [routeObserver],
             home: const PostsPage()));
   }
 }
