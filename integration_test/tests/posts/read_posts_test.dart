@@ -5,12 +5,17 @@ import 'package:flutter_web_clean_arch/main.dart' as app;
 import '../../utils/helper.dart';
 
 void main() async {
-  group('Fetch all posts Test', () {
-    testWidgets('Successfully fetch all posts', (WidgetTester tester) async {
+  group('Fetch posts Test', () {
+    testWidgets('Successfully fetch posts', (WidgetTester tester) async {
       app.main();
       await Helper.pumpUntilFound(tester, find.text('Posts'));
-    });
 
-    testWidgets('fetching posts failed', (WidgetTester tester) async {});
+      final addPostButton =
+          find.widgetWithIcon(FloatingActionButton, Icons.add);
+      final postTile = find.byType(ListTile);
+
+      expect(addPostButton, findsOneWidget);
+      expect(postTile, findsAtLeastNWidgets(1));
+    });
   });
 }

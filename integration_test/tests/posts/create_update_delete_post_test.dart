@@ -9,9 +9,5 @@ void main() async {
         'Successfully UPDATE post test', (WidgetTester tester) async {});
     testWidgets(
         'Successfully DELETE post test', (WidgetTester tester) async {});
-
-    testWidgets('Failed to CREATE post test', (WidgetTester tester) async {});
-    testWidgets('Failed to UPDATE post test', (WidgetTester tester) async {});
-    testWidgets('Failed to DELETE post test', (WidgetTester tester) async {});
   });
 }
