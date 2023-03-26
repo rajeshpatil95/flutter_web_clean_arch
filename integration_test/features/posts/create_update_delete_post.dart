@@ -8,6 +8,16 @@ class CreateUpdateDelete {
 
   CreateUpdateDelete(this.tester);
 
+  Future<void> clickPostTile() async {
+    final postTile = find.byType(ListTile).first;
+    await tester.tap(postTile);
+  }
+
+  Future<void> clickFloatingButton() async {
+    final floatingButton = find.widgetWithIcon(FloatingActionButton, Icons.add);
+    await tester.tap(floatingButton);
+  }
+
   Future<void> enterTitle({String title = ''}) async {
     final textFormFieldTitle = find.widgetWithText(TextFormField, title);
     await tester.tap(textFormFieldTitle);
@@ -22,9 +32,9 @@ class CreateUpdateDelete {
     await Helper.enterDone(tester);
   }
 
-  Future<void> clickAddPostButton() async {
+  Future<void> clickAddEditDeletePostButton(String mode) async {
     final createProjectButtonFinder = find.ancestor(
-        of: find.text('Add'),
+        of: find.text(mode),
         matching: find.byWidgetPredicate(
             (widget) => '${widget.runtimeType}' == '_ElevatedButtonWithIcon'));
     await tester.tap(createProjectButtonFinder);

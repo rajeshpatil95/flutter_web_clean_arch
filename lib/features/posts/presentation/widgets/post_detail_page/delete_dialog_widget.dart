@@ -27,7 +27,7 @@ class DeleteDialogWidget extends StatelessWidget {
               DeletePostEvent(postId: postId),
             );
           },
-          child: Text("Yes"),
+          child: const Text("Yes"),
         ),
       ],
     );
