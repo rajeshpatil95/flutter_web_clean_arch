@@ -15,4 +15,8 @@ class Helper {
     }
     timer.cancel();
   }
+
+  static Future<void> enterDone(WidgetTester tester) async {
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+  }
 }
