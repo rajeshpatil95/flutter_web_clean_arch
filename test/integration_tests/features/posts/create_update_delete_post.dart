@@ -18,17 +18,17 @@ class CreateUpdateDelete {
     await tester.tap(floatingButton);
   }
 
-  Future<void> enterTitle({String title = ''}) async {
-    final textFormFieldTitle = find.widgetWithText(TextFormField, title);
+  Future<void> enterTitle({String title = '', String hintText = ''}) async {
+    final textFormFieldTitle = find.widgetWithText(TextFormField, hintText);
     await tester.tap(textFormFieldTitle);
     await tester.enterText(textFormFieldTitle, title);
     await Helper.enterDone(tester);
   }
 
-  Future<void> enterBody({String body = ''}) async {
-    final textFormFieldTitle = find.widgetWithText(TextFormField, body);
-    await tester.tap(textFormFieldTitle);
-    await tester.enterText(textFormFieldTitle, body);
+  Future<void> enterBody({String body = '', String hintText = ''}) async {
+    final textFormFieldBody = find.widgetWithText(TextFormField, hintText);
+    await tester.tap(textFormFieldBody);
+    await tester.enterText(textFormFieldBody, body);
     await Helper.enterDone(tester);
   }
 

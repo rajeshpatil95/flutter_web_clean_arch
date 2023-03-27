@@ -15,8 +15,9 @@ void main() async {
 
       await createUpdateDelete.clickFloatingButton();
       await Helper.pumpUntilFound(tester, find.text('Add Post'));
-      await createUpdateDelete.enterTitle(title: 'Rajesh Patil');
-      await createUpdateDelete.enterBody(body: 'Bangalore');
+      await createUpdateDelete.enterTitle(
+          title: 'Rajesh Patil', hintText: 'Title');
+      await createUpdateDelete.enterBody(body: 'Bangalore', hintText: 'Body');
       await createUpdateDelete.clickAddEditDeletePostButton('Add');
       await Helper.pumpUntilFound(tester, find.text('Post Added Successfully'));
     });
