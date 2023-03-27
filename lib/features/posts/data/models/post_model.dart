@@ -12,6 +12,6 @@ class PostModel extends Post {
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id ?? 0, 'title': title ?? "", 'body': body ?? ""};
+    return {'id': id ?? 0, 'title': title, 'body': body};
   }
 }
