@@ -20,7 +20,9 @@ void main() {
       when(client.get(
         Uri.parse(BASE_URL + "/posts/"),
         headers: {"Content-Type": "application/json"},
-      )).thenAnswer((_) async => http.Response('Deleted', 200));
+      )).thenAnswer((_) async => http.Response(
+          '[{"userId": 1, "id": 1, "title": "Rajesh Patil", "body": "Bangalore"}, {"userId": 2, "id": 2, "title": "Krishna Patil", "body": "Goa"}]',
+          200));
 
       expect(await PostRemoteDataSourceImpl(client: client).getAllPosts(),
           isA<List<PostModel>>());
